@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-messages.min.js"></script>
+    <script src="js/svg-assets-cache.js"></script>
+    <script src="js/angular-material.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.css"/>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+  </head>
+
+<body ng-controller="mainCtrl" ng-cloak="" class="virtualRepeatdemoVerticalUsage">
+    <div>
+
+<md-content layout="column">
+      <div class="repeated-row-item">
+      <!-- 			Left panel			-->
+      	<div style="width:50%;float:left; text-align:center;" >
+      		Conflicted component
+      	</div>
+      <!-- 			Right panel			-->
+      	<div style="width:50%;float:left; text-align:center;" >
+      		Original component
+      	</div>
+      </div>
+   
+ 	<md-virtual-repeat-container id="vertical-container"  md-top-index="topIndex">
+      	<div md-virtual-repeat="row in  rowCollection" class="repeated-row" flex="">
+
+      <div class="repeated-row-item" >
+      <!-- 			Left panel			-->
+      	<div style="width:48%;float:left;"  ng-style="row.DiffAction ? STYLE_UPDATED:  row.Diffstyle">
+		<div>{{row.number}}.	</div>
+	      	<div ng-show="row.isKey" >
+		        {{row.margin + row.parentTag}}
+	        </div>
+        	<div ng-show="!row.isKey">
+	    	    {{row.margin + row.tag}}: &nbsp;{{row.OldData}}
+        	</div>
+
+	        <div ng-show="row.DiffType == 'updated' && !row.isKey" style="float:right;">
+        		<div ng-show="row.DiffType == 'updated' && !row.isKey && !row.DiffAction">
+        			<span class="glyphicon glyphicon-arrow-right" ng-click="updated(row.number)"></span>
+	        	</div>
+        		<div ng-show="row.DiffType == 'updated' && !row.isKey && row.DiffAction">
+        			<span class="glyphicon glyphicon-arrow-left" ng-click="updated(row.number)"></span>
+	        	</div>
+        	</div>
+	        <div ng-show="row.DiffType == 'created' && !row.isKey" style="float:right;">
+        		<div ng-show="row.DiffType == 'created' && !row.isKey && !row.DiffAction">
+        			<span class="glyphicon glyphicon-arrow-left" ng-click="updated(row.number)"></span>
+	        	</div>
+        		<div ng-show="row.DiffType == 'created' && !row.isKey && row.DiffAction">
+        			<span class="glyphicon glyphicon-arrow-right" ng-click="updated(row.number)"></span>
+	        	</div>
+        	</div>
+	
+        </div>
+	<div style="width:1%;float:left; border-left: 1px solid grey; height: 40px;" ></div>
+	
+      <!-- 			Right panel			-->
+       <div style="width:48%;float:left;" ng-style="row.DiffAction ? STYLE_UPDATED: row.Diffstyle">
+	      	<div ng-show="row.isKey" >
+    		    	{{row.margin + row.parentTag}}
+        	</div>
+	        <div ng-show="!row.isKey">
+    	    		{{row.margin + row.tag}}: &nbsp;{{row.DiffViewValue}}
+        	</div>
+        </div>
+      </div> 
+
+
+      </div>
+
+    </md-virtual-repeat-container>
+</md-content>
+
+	</div>
+ 	<div ng-show="isLoading" class="loading-indicator"></div> 
+ </body>
+
+</html>
